@@ -24,7 +24,7 @@ function SelectedWorks() {
           <p>FloraHive Metrics System<br></br>Scalable Microservices</p>
         </div>
         <div>
-          <a href="#action">
+          <a href="/gamebox">
           <img src={GameBox}></img>
           </a>
           <p>FloraHive at GameBox Festival</p>

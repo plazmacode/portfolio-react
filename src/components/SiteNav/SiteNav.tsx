@@ -11,9 +11,9 @@ const SiteNav: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
 
   const location = useLocation();
-  const pages = ["/about", "/floraHive", "/florahive-metrics"]
-  const pathName = location.pathname.replace(/\/$/, "");
-  const isAltNav = pages.includes(pathName);
+  const pages = ["/"]
+  const pathName = location.pathname
+  const isAltNav = !pages.includes(pathName);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +42,7 @@ const SiteNav: React.FC = () => {
           <NavDropdown title="FloraHive" id="collapsible-nav-dropdown">
             <NavDropdown.Item as={NavLink} to="/florahive">FloraHive</NavDropdown.Item>
             <NavDropdown.Item as={NavLink} to="/florahive-metrics">FloraHive Metrics</NavDropdown.Item>
-            <NavDropdown.Item href="#action3">GameBox</NavDropdown.Item>
+            <NavDropdown.Item as={NavLink} to="/gamebox">GameBox</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Container>
