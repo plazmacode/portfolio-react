@@ -88,6 +88,7 @@ function PageNotFound() {
       let enemyBehind3: p5.Image;
       let enemyBehind4: p5.Image;
 
+      let score = 0;
       let towerX: number;
       let towerY: number;
       const projectiles: Projectile[] = [];
@@ -156,6 +157,7 @@ function PageNotFound() {
         p.textSize(32);
         p.textAlign(p.CENTER, p.CENTER);
         p.text("FloraHive for free!!!", p.width / 2, 40);
+        p.text("Score: " + score, 80, 40);
 
         //projectiles 
         for (let index = 0; index < projectiles.length; index++) {
@@ -178,6 +180,7 @@ function PageNotFound() {
             if (d < collisionRadius) {
               enemies.splice(j, 1);
               projectiles.splice(index, 1);
+              score += 1;
               break; // stop checking this projectile
             }
           }

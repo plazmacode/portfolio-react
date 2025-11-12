@@ -4,7 +4,7 @@ function Gamebox() {
   return (
     <>
       <div className="page-title">
-        <p>Gamebox</p>
+        <p>Gamebox 2025</p>
       </div>
       <section className="content header-spacing">
         <div className="row">
