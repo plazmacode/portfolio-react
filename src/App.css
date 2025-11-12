@@ -1,0 +1,96 @@
+#root {
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+}
+
+.nav-container {
+  max-width: 90vw;
+  width: 100%;
+}
+
+.content {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.page-title {
+  min-height: 250px;
+  background-color: rgb(30, 30, 40);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-title p {
+  color: white;
+  font-size: 50px;
+}
+
+.navbar-alt .navbar-brand {
+  color: white;
+}
+
+.navbar-alt .nav-link {
+  color: white;
+}
+
+.navbar-alt .nav-link.active {
+  color: #d1b932 !important;
+}
+
+.navbar-alt .nav-link:hover {
+  color: #d1b932;
+}
+
+.flex {
+  display: flex;
+  gap: 50px;
+}
+
+.header-spacing {
+  padding-top: 50px;
+}
+.footer-spacing {
+  padding-bottom: 50px;
+}
+
+.split {
+  display: flex;
+  width: 100%;
+}
+
+.row img {
+  max-width: 100%;
+}
+
+/* Make text paragraphs a bit lower vertically compared to the images*/
+.row div p:first-child {
+  padding-top: 15px;
+}
+
+
+.split > div:first-child {
+  margin-right: 50px; /* space between columns */
+  flex-basis: 50%;
+}
+
+.split > div:last-child {
+  flex-basis: 50%;
+}
+
+.heading {
+  padding-top: 20px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+}
+
+.home-footer {
+  padding-top: 100px;
+  text-align:center;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.blue {
+  color: #226e93;
+}

@@ -1,0 +1,29 @@
+.previews-title h2{
+  text-align: center;
+}
+
+.previews-content {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 300px;
+}
+
+.previews-content > div {
+  padding: 10px;
+  text-align: center;
+  flex: 1 1 200px;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.previews-content img {
+  width: 100%;     /* Make images fill the box */
+  height: auto;
+  display: block;  /* Remove extra bottom space */
+}
+
+.previews-content p {
+  font-size: 18px;
+}

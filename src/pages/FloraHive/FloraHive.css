@@ -1,0 +1,40 @@
+.florahive-title-container {
+  height: 250px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+.florahive-title-container div{
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.florahive-title-image {
+  background-position: center center;
+  background-image:url("./FloraHiveLogo.png");
+  background-size: cover;
+  display: table-cell;
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.florahive-title-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(52, 52, 52, 0.58); /* darker grey overlay */
+  pointer-events: none;
+}
