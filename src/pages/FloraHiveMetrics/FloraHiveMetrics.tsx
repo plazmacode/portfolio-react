@@ -1,12 +1,20 @@
 import Heatmap from "./Heatmap.png";
+import MetricsPreview from "./MetricsPreview";
 import Plot from "./Plot.png";
 
 function FloraHiveMetrics() {
+    
+
   return (
     <>
       <div className="page-title">
         <p>FloraHive Metrics</p>
       </div>
+
+      <section className="content header-spacing">
+        <MetricsPreview></MetricsPreview>
+      </section>
+
       <section className="content header-spacing">
         <div className="row">
           <div className="col-md-6">
