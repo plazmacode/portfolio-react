@@ -1,17 +1,37 @@
 import Heatmap from "./Heatmap.png";
 import MetricsPreview from "./MetricsPreview";
+import type { Mutation } from "./Models/Mutation";
 import Plot from "./Plot.png";
+
 
 function FloraHiveMetrics() {
     
+  const handleAddMutation = async() => {
+    const payload = {
+      Resets: 1,
+      RunCount: 2,
+      Battle: 3,
+      Wave: 0,
+      MutationName: "string",
+      MutationCount: 0
+    };
+    
+    try {
+      const mutations = await CreateAndGetMutations(payload);
+      console.log("Updated mutations:", mutations);
+
+    } catch (error) {
+      console.error("Failed:", error);
+    }
+  }
 
   return (
     <>
       <div className="page-title">
         <p>FloraHive Metrics</p>
       </div>
-
       <section className="content header-spacing">
+      <button onClick={handleAddMutation} type="button" className="btn btn-danger">Add Mutation</button>
         <MetricsPreview></MetricsPreview>
       </section>
 
@@ -47,3 +67,37 @@ function FloraHiveMetrics() {
 }
 
 export default FloraHiveMetrics;
+
+
+export async function CreateAndGetMutations(payload : Mutation) {
+  const endpoint = "http://localhost:8080/api/metrics/mutations";
+
+  try {
+    // Create Mutations
+    const postResponse = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!postResponse.ok) {
+      throw new Error(`POST failed: ${postResponse.status}`);
+    }
+
+    // Get Mutations
+    const getResponse = await fetch(endpoint);
+
+    if (!getResponse.ok) {
+      throw new Error(`GET failed: ${getResponse.status}`);
+    }
+
+    const mutations = await getResponse.json();
+
+    return mutations; // return full list
+  } catch (err) {
+    console.error("CreateAndGetMutations error:", err);
+    throw err;
+  }
+}
