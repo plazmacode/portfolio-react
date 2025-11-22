@@ -1,24 +1,23 @@
 import Heatmap from "./Heatmap.png";
 import MetricsPreview from "./MetricsPreview";
 import type { Mutation } from "./Models/Mutation";
+import type { RunSimulationSettings } from "./Models/RunSimulationSettings";
 import Plot from "./Plot.png";
 
 
 function FloraHiveMetrics() {
     
   const handleAddMutation = async() => {
-    const payload = {
-      Resets: 1,
-      RunCount: 2,
-      Battle: 3,
-      Wave: 0,
-      MutationName: "string",
-      MutationCount: 0
-    };
+    const settings: RunSimulationSettings  = {
+      InitialPlayerHealth: 15,
+      BattlesPerRun: 5,
+      WavesPerbattle: 10,
+      BaseDamageChance: 0.1
+    }
     
     try {
-      const mutations = await CreateAndGetMutations(payload);
-      console.log("Updated mutations:", mutations);
+      const runResult = await SimulateRun(settings);
+      console.log("Run Result:", runResult);
 
     } catch (error) {
       console.error("Failed:", error);
@@ -31,7 +30,7 @@ function FloraHiveMetrics() {
         <p>FloraHive Metrics</p>
       </div>
       <section className="content header-spacing">
-      <button onClick={handleAddMutation} type="button" className="btn btn-danger">Add Mutation</button>
+      <button onClick={handleAddMutation} type="button" className="btn btn-danger">Simulate Run</button>
         <MetricsPreview></MetricsPreview>
       </section>
 
@@ -69,8 +68,8 @@ function FloraHiveMetrics() {
 export default FloraHiveMetrics;
 
 
-export async function CreateAndGetMutations(payload : Mutation) {
-  const endpoint = "http://localhost:8080/api/metrics/mutations";
+export async function SimulateRun(settings: RunSimulationSettings) {
+  const endpoint = "http://REDACTED/api/sim/run";
 
   try {
     // Create Mutations
@@ -79,25 +78,14 @@ export async function CreateAndGetMutations(payload : Mutation) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(settings)
     });
 
     if (!postResponse.ok) {
       throw new Error(`POST failed: ${postResponse.status}`);
     }
-
-    // Get Mutations
-    const getResponse = await fetch(endpoint);
-
-    if (!getResponse.ok) {
-      throw new Error(`GET failed: ${getResponse.status}`);
-    }
-
-    const mutations = await getResponse.json();
-
-    return mutations; // return full list
-  } catch (err) {
-    console.error("CreateAndGetMutations error:", err);
-    throw err;
+  }
+  catch(err) {
+    console.log(err);
   }
 }

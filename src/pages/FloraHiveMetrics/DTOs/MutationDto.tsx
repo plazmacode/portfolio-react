@@ -1,5 +1,4 @@
 export type Mutation = {
-  Id: number
   Resets: number
   RunCount: number
   Battle: number
