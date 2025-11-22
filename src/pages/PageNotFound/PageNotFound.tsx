@@ -96,21 +96,27 @@ function PageNotFound() {
       const imageScale = 2;
 
       function spawnEnemy() {
-        const offset = -200 + (Math.random()*400);
-        enemies.push(new Enemy(p.width, p.height/2 + offset));
+        if (document.hasFocus()) {
+          const offset = -200 + (Math.random()*400);
+          enemies.push(new Enemy(p.width, p.height/2 + offset));
+        }
       }
       
       p.setup = () => {
         p.createCanvas(800, 600);
         p.noSmooth();
         p.background(20);
-        setInterval(spawnEnemy, 1000);
+
         p.loadImage(AcidTower, (img: p5.Image) => {
           tower = img;
           p.image(tower, 20, p.height-tower.height*imageScale-20, tower.width*imageScale, tower.height*imageScale);
           towerX = tower.width*imageScale;
           towerY = p.height-tower.height*imageScale-20 + 25;
         });
+
+        setInterval(spawnEnemy, 1000);
+
+        // very janky image loading
         p.loadImage(EnemyArm, (img: p5.Image) => {
           enemyArm = img;
         });
