@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Heatmap from "./Heatmap.png";
 import MetricsPreview from "./MetricsPreview";
 import type { Mutation } from "./Models/Mutation";
@@ -6,7 +7,8 @@ import Plot from "./Plot.png";
 
 
 function FloraHiveMetrics() {
-    
+  const [mutations, setMutations] = useState<Mutation[]>([]);
+
   const handleAddMutation = async() => {
     const settings: RunSimulationSettings  = {
       InitialPlayerHealth: 15,
@@ -18,6 +20,10 @@ function FloraHiveMetrics() {
     try {
       const runResult = await SimulateRun(settings);
       console.log("Run Result:", runResult);
+
+      if(runResult) {
+        setMutations(prev => [...prev, ...runResult]);
+      }
 
     } catch (error) {
       console.error("Failed:", error);
@@ -31,7 +37,8 @@ function FloraHiveMetrics() {
       </div>
       <section className="content header-spacing">
       <button onClick={handleAddMutation} type="button" className="btn btn-danger">Simulate Run</button>
-        <MetricsPreview></MetricsPreview>
+      <p>Total Mutations: {mutations.length}</p>
+        <MetricsPreview mutations={mutations}></MetricsPreview>
       </section>
 
       <section className="content header-spacing">
@@ -84,6 +91,17 @@ export async function SimulateRun(settings: RunSimulationSettings) {
     if (!postResponse.ok) {
       throw new Error(`POST failed: ${postResponse.status}`);
     }
+    const data: Mutation[] = await postResponse.json();
+    console.log(data[0]);
+    const newMutations: Mutation[] = data.map((m: any) => ({
+      Resets: m.resets,
+      RunCount: m.runCount,
+      Battle: m.battle,
+      Wave: m.wave,
+      MutationName: m.mutationName,
+      MutationCount: m.mutationCount,
+    }));
+    return newMutations;
   }
   catch(err) {
     console.log(err);
