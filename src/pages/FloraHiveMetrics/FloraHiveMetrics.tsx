@@ -8,21 +8,25 @@ import type { Run } from "./Models/Run";
 
 
 function FloraHiveMetrics() {
-  const [mutations, setMutations] = useState<Mutation[]>([]);
+  const [runs, setRuns] = useState<Run[]>([]);
 
   const fetchRunsOnLoad = async () => {
     const settings: RunSimulationSettings = {
       InitialPlayerHealth: 15,
       BattlesPerRun: 5,
-      WavesPerbattle: 10,
+      WavesPerBattle: 10,
       BaseDamageChance: 0.1,
+      EnergyChance: 0.3,
+      BaseEnergyGain: 100,
+      BaseBattleDifficulty: 10,
+      BattleDifficultyMultiplier: 1.5
     };
 
     try {
       // Get all runs by first simulating a run to get token
       const runs: Run[] = await SimulateRun(settings);
       if (runs) {
-        setMutations(runs.flatMap((run) => run.Mutations));
+        setRuns(runs);
       }
     } catch (error) {
       console.error("Failed to fetch runs on load:", error);
@@ -33,18 +37,22 @@ function FloraHiveMetrics() {
     fetchRunsOnLoad();
   }, []);
 
-  const handleAddMutation = async() => {
+  const handleSimulateNewRun = async() => {
     const settings: RunSimulationSettings  = {
       InitialPlayerHealth: 15,
       BattlesPerRun: 5,
-      WavesPerbattle: 10,
-      BaseDamageChance: 0.1
+      WavesPerBattle: 10,
+      BaseDamageChance: 0.1,
+      EnergyChance: 0.3,
+      BaseEnergyGain: 100,
+      BaseBattleDifficulty: 10,
+      BattleDifficultyMultiplier : 1.5
     }
     
     try {
       const runs: Run[] = await SimulateRun(settings);
       if(runs) {
-        setMutations(runs.flatMap(run => run.Mutations));
+        setRuns(runs);
       }
 
     } catch (error) {
@@ -58,9 +66,13 @@ function FloraHiveMetrics() {
         <p>FloraHive Metrics</p>
       </div>
       <section className="content header-spacing">
-      <button onClick={handleAddMutation} type="button" className="btn btn-danger">Simulate Run</button>
-      <p>Total Mutations: {mutations.length}</p>
-        <MetricsPreview mutations={mutations}></MetricsPreview>
+      <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger">Simulate Run</button>
+      <p>Total Runs: {runs.length}</p>
+      <p>Total Mutations: {runs.flatMap(run => run.Mutations).length}</p>
+      <p>Total Battles: {runs.flatMap(run => run.Battles).length}</p>
+      <p>Total Waves: {runs.flatMap(run => run.Waves).length}</p>
+      <p>Total Anomalies: {runs.flatMap(run => run.Anomalies).length}</p>
+        <MetricsPreview runs={runs}></MetricsPreview>
       </section>
 
       <section className="content header-spacing">

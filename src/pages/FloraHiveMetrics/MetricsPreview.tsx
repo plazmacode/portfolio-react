@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Mutation } from "./Models/Mutation";
 import type { Data, Layout } from "plotly.js";
+import type { Run } from "./Models/Run";
 
-function ProcessBattle(battle, wavesPerBattle, mutations) {
+function ProcessBattle(battle, wavesPerBattle, mutations: Mutation[]) {
   const xValues = Array.from({ length: wavesPerBattle }, (_, i) => i);
   const yValues = Array(wavesPerBattle).fill(0); // start with 0 mutations per wave
   const totalRuns = mutations.length > 0
@@ -35,8 +36,9 @@ function MetricsPreview(props) {
     const mutationColor = "rgb(89, 132, 252)";
     const epColor = "rgb(26, 199, 67)";
     const traces = [];
-
-    const {xValues, yValues} = ProcessBattle(1, wavesPerBattle, props.mutations);
+    const runs: Run[] = props.runs;
+    const mutations = runs.flatMap(run => run.Mutations);
+    const {xValues, yValues} = ProcessBattle(1, wavesPerBattle, mutations);
     traces.push({
       x: xValues,
       y: yValues,

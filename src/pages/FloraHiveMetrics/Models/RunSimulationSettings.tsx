@@ -1,6 +1,10 @@
 export type RunSimulationSettings = {
   InitialPlayerHealth: number,
   BattlesPerRun: number,
-  WavesPerbattle: number,
-  BaseDamageChance: number
+  WavesPerBattle: number,
+  BaseDamageChance: number,
+  EnergyChance: number,
+  BaseEnergyGain: number,
+  BaseBattleDifficulty: number,
+  BattleDifficultyMultiplier: number
 }
