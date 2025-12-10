@@ -3,19 +3,22 @@ import Plot from "react-plotly.js";
 import type { Mutation } from "./Models/Mutation";
 import type { Data, Layout } from "plotly.js";
 
-function ProcessBattle(run, battle, wavesPerBattle, mutations) {
-  const xValues = [];
-  let yValues = [];
-  for (let index = 0; index < wavesPerBattle; index++) {
-    const m = mutations.find(x => x.RunCount == run && x.Battle == battle&& x.Wave == index)
-    if (m != null) {
-      yValues.push(1);
-    } else {
-      yValues.push(0);
+function ProcessBattle(battle, wavesPerBattle, mutations) {
+  const xValues = Array.from({ length: wavesPerBattle }, (_, i) => i);
+  const yValues = Array(wavesPerBattle).fill(0); // start with 0 mutations per wave
+  const totalRuns = mutations.length > 0
+  ? Math.max(...mutations.map(m => m.RunCount)) + 1 // +1 because RunCount is zero-based
+  : 0;
+  for (let i = 0; i < totalRuns; i++) {
+    for (let wave = 0; wave < wavesPerBattle; wave++) {
+      const m = mutations.find(x => x.RunCount === i && x.Battle === battle && x.Wave === wave);
+      if (m) {
+        yValues[wave] += 1; // increment count for this wave
+      }
     }
-    xValues.push(index);
   }
-  return xValues;
+
+  return { xValues, yValues };
 }
 
 function MetricsPreview(props) {
@@ -25,8 +28,6 @@ function MetricsPreview(props) {
   useEffect(() => {
     const maxBattles = 5;
     const wavesPerBattle = 10;
-
-    let xValues: number[] = [];
     const yMutationsGained: number[] = [];
 
     const energyColor = "rgb(253, 182, 70)";
@@ -35,11 +36,10 @@ function MetricsPreview(props) {
     const epColor = "rgb(26, 199, 67)";
     const traces = [];
 
-    xValues = ProcessBattle(0, 1, wavesPerBattle, props.mutations);
-
+    const {xValues, yValues} = ProcessBattle(1, wavesPerBattle, props.mutations);
     traces.push({
       x: xValues,
-      y: 0,
+      y: yValues,
       name: "Mutations",
       type: "scatter",
       mode: "lines",
@@ -133,7 +133,7 @@ function MetricsPreview(props) {
     };
     setPlotData(traces);
     setLayout(layout);
-  }, []);
+  }, [props.mutations]);
 
   return (
       <div style={{ width: "100%", height: "600px" }}>

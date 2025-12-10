@@ -1,11 +1,11 @@
 export type Wave = {
-  id: number
-  resets: number
-  runCount: number
-  battleCount: number
-  waveCount: number
-  energyGained: number
-  evolutionPointsGained: number
-  damageTaken: number
-  terrainType: string
+  Id: number
+  Resets: number
+  RunCount: number
+  BattleCount: number
+  WaveCount: number
+  EnergyGained: number
+  EvolutionPointsGained: number
+  DamageTaken: number
+  TerrainType: string
 }

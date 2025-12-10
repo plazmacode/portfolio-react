@@ -4,6 +4,7 @@ import MetricsPreview from "./MetricsPreview";
 import type { Mutation } from "./Models/Mutation";
 import type { RunSimulationSettings } from "./Models/RunSimulationSettings";
 import Plot from "./Plot.png";
+import type { Run } from "./Models/Run";
 
 
 function FloraHiveMetrics() {
@@ -18,11 +19,9 @@ function FloraHiveMetrics() {
     }
     
     try {
-      const runResult = await SimulateRun(settings);
-      console.log("Run Result:", runResult);
-
-      if(runResult) {
-        setMutations(prev => [...prev, ...runResult]);
+      const runs: Run[] = await SimulateRun(settings);
+      if(runs) {
+        setMutations(runs.flatMap(run => run.Mutations));
       }
 
     } catch (error) {
@@ -77,33 +76,51 @@ export default FloraHiveMetrics;
 
 export async function SimulateRun(settings: RunSimulationSettings) {
   const endpoint = "http://REDACTED/api/sim/run";
+    let token: string | null = null;
 
   try {
-    // Create Mutations
     const postResponse = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(settings)
     });
 
     if (!postResponse.ok) {
       throw new Error(`POST failed: ${postResponse.status}`);
     }
-    const data: Mutation[] = await postResponse.json();
-    console.log(data[0]);
-    const newMutations: Mutation[] = data.map((m: any) => ({
-      Resets: m.resets,
-      RunCount: m.runCount,
-      Battle: m.battle,
-      Wave: m.wave,
-      MutationName: m.mutationName,
-      MutationCount: m.mutationCount,
-    }));
-    return newMutations;
+
+    const result = await postResponse.json();
+    token = result.token;
+    console.log(result);
   }
   catch(err) {
     console.log(err);
   }
+
+  // Get All Runs
+  try {
+    const getResponse = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    });
+    if (!getResponse.ok) {
+      throw new Error(`GET failed: ${getResponse.status}`);
+    }
+    const data: Run[] = await getResponse.json();
+    const allRuns: Run[] = data.map((r: any) => ({
+      Mutations: r.mutations,
+      Battles: r.battles,
+      Waves: r.waves,
+      Anomalies: r.anomalies
+    }));
+    console.log(data);
+    return allRuns;
+  }
+  catch(err) {
+    console.log(err);
+  }
+  return []
 }
