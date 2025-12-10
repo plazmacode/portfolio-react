@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Heatmap from "./Heatmap.png";
 import MetricsPreview from "./MetricsPreview";
 import type { Mutation } from "./Models/Mutation";
@@ -9,6 +9,29 @@ import type { Run } from "./Models/Run";
 
 function FloraHiveMetrics() {
   const [mutations, setMutations] = useState<Mutation[]>([]);
+
+  const fetchRunsOnLoad = async () => {
+    const settings: RunSimulationSettings = {
+      InitialPlayerHealth: 15,
+      BattlesPerRun: 5,
+      WavesPerbattle: 10,
+      BaseDamageChance: 0.1,
+    };
+
+    try {
+      // Get all runs by first simulating a run to get token
+      const runs: Run[] = await SimulateRun(settings);
+      if (runs) {
+        setMutations(runs.flatMap((run) => run.Mutations));
+      }
+    } catch (error) {
+      console.error("Failed to fetch runs on load:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRunsOnLoad();
+  }, []);
 
   const handleAddMutation = async() => {
     const settings: RunSimulationSettings  = {
@@ -27,7 +50,7 @@ function FloraHiveMetrics() {
     } catch (error) {
       console.error("Failed:", error);
     }
-  }
+  };
 
   return (
     <>
@@ -98,6 +121,15 @@ export async function SimulateRun(settings: RunSimulationSettings) {
   }
 
   // Get All Runs
+  if (token != null) {
+    return GetAllRuns(token);
+  }
+  return [];
+}
+
+export async function GetAllRuns(token: string) {
+  const endpoint = "http://REDACTED/api/sim/run";
+
   try {
     const getResponse = await fetch(endpoint, {
       method: "GET",
