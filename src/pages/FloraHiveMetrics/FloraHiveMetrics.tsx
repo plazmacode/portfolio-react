@@ -5,6 +5,7 @@ import type { Mutation } from "./Models/Mutation";
 import type { RunSimulationSettings } from "./Models/RunSimulationSettings";
 import Plot from "./Plot.png";
 import type { Run } from "./Models/Run";
+import MetricsPreview2 from "./MetricsPreview2";
 
 
 function FloraHiveMetrics() {
@@ -72,7 +73,7 @@ function FloraHiveMetrics() {
       <p>Total Battles: {runs.flatMap(run => run.Battles).length}</p>
       <p>Total Waves: {runs.flatMap(run => run.Waves).length}</p>
       <p>Total Anomalies: {runs.flatMap(run => run.Anomalies).length}</p>
-        <MetricsPreview runs={runs}></MetricsPreview>
+        <MetricsPreview2 runs={runs}></MetricsPreview2>
       </section>
 
       <section className="content header-spacing">
@@ -155,7 +156,14 @@ export async function GetAllRuns(token: string) {
     }
     const data: Run[] = await getResponse.json();
     const allRuns: Run[] = data.map((r: any) => ({
-      Mutations: r.mutations,
+      Mutations: r.mutations.map((m: any) => ({
+        Resets: m.resets,
+        RunCount: m.runCount,
+        Battle: m.battle,
+        Wave: m.wave,
+        MutationName: m.mutationName,
+        MutationCount: m.mutationCount
+      })),
       Battles: r.battles,
       Waves: r.waves,
       Anomalies: r.anomalies

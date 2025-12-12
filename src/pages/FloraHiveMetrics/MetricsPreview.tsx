@@ -3,8 +3,13 @@ import Plot from "react-plotly.js";
 import type { Mutation } from "./Models/Mutation";
 import type { Data, Layout } from "plotly.js";
 import type { Run } from "./Models/Run";
+import type { Battle } from "./Models/Battle";
 
-function ProcessBattle(battle, wavesPerBattle, mutations: Mutation[]) {
+/*
+  Deprecated visualization code stripped from FloraHive's real metrics frontend.
+  Rewritten as a React component. Discarded in exchange for ECharts implementation.
+*/
+function ProcessBattle(battle: Battle, wavesPerBattle, mutations: Mutation[]) {
   const xValues = Array.from({ length: wavesPerBattle }, (_, i) => i);
   const yValues = Array(wavesPerBattle).fill(0); // start with 0 mutations per wave
   const totalRuns = mutations.length > 0
