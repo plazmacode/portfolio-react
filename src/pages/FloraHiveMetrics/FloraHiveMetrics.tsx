@@ -103,7 +103,7 @@ export default FloraHiveMetrics;
 
 
 export async function SimulateRun(settings: RunSimulationSettings) {
-  const endpoint = "http://REDACTED/api/sim/run";
+  const endpoint = "http://REDACTED/api/sim/run/1";
 
   const postResponse = await fetch(endpoint, {
     method: "POST",
