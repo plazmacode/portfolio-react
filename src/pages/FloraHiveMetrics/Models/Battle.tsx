@@ -1,7 +1,7 @@
 export type Battle = {
-  Id: number
-  Resets: number
-  RunCount: number
-  BattleCount: number
-  TerrainType: string
+  id: number
+  resets: number
+  runCount: number
+  battleCount: number
+  terrainType: string
 }

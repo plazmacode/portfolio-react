@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import Heatmap from "./Heatmap.png";
-import MetricsPreview from "./MetricsPreview";
-import type { Mutation } from "./Models/Mutation";
 import type { RunSimulationSettings } from "./Models/RunSimulationSettings";
 import Plot from "./Plot.png";
 import type { Run } from "./Models/Run";
@@ -10,33 +8,25 @@ import MetricsPreview2 from "./MetricsPreview2";
 
 function FloraHiveMetrics() {
   const [runs, setRuns] = useState<Run[]>([]);
+  const [token, setToken] = useState<string>("");
+  const [showAllUsers, setShowAllUsers] = useState<boolean>(true);
 
-  const fetchRunsOnLoad = async () => {
-    const settings: RunSimulationSettings = {
-      InitialPlayerHealth: 15,
-      BattlesPerRun: 5,
-      WavesPerBattle: 10,
-      BaseDamageChance: 0.1,
-      EnergyChance: 0.3,
-      BaseEnergyGain: 100,
-      BaseBattleDifficulty: 10,
-      BattleDifficultyMultiplier: 1.5
-    };
-
+  const fetchRuns = async (allUsers: boolean) => {
+    if (!allUsers && !token) {
+      console.warn("Skipping fetch: No token available for private runs.");
+      return;
+    }
     try {
-      // Get all runs by first simulating a run to get token
-      const runs: Run[] = await SimulateRun(settings);
-      if (runs) {
-        setRuns(runs);
-      }
+      const result = await GetAllRuns(token, !allUsers);
+      setRuns(result);
     } catch (error) {
-      console.error("Failed to fetch runs on load:", error);
+      console.error("Failed to fetch runs:", error);
     }
   };
 
   useEffect(() => {
-    fetchRunsOnLoad();
-  }, []);
+    fetchRuns(showAllUsers);
+  }, [showAllUsers, token]);
 
   const handleSimulateNewRun = async() => {
     const settings: RunSimulationSettings  = {
@@ -51,11 +41,10 @@ function FloraHiveMetrics() {
     }
     
     try {
-      const runs: Run[] = await SimulateRun(settings);
-      if(runs) {
-        setRuns(runs);
-      }
-
+      const { token, runs } = await SimulateRun(settings);
+      setToken(token);
+      setShowAllUsers(false); // Switch to private view to see the new run
+      setRuns(runs);
     } catch (error) {
       console.error("Failed:", error);
     }
@@ -67,12 +56,15 @@ function FloraHiveMetrics() {
         <p>FloraHive Metrics</p>
       </div>
       <section className="content header-spacing">
-      <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger">Simulate Run</button>
+      <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger me-2">Simulate Run</button>
+      <button  onClick={() => setShowAllUsers(!showAllUsers)} className={`btn ${showAllUsers ? 'btn-outline-primary' : 'btn-primary'}`}>
+        {showAllUsers ? "Showing: All Users" : "Showing: My Runs Only"}
+      </button>
       <p>Total Runs: {runs.length}</p>
-      <p>Total Mutations: {runs.flatMap(run => run.Mutations).length}</p>
-      <p>Total Battles: {runs.flatMap(run => run.Battles).length}</p>
-      <p>Total Waves: {runs.flatMap(run => run.Waves).length}</p>
-      <p>Total Anomalies: {runs.flatMap(run => run.Anomalies).length}</p>
+      <p>Total Mutations: {runs.flatMap(run => run.mutations).length}</p>
+      <p>Total Battles: {runs.flatMap(run => run.battles).length}</p>
+      <p>Total Waves: {runs.flatMap(run => run.waves).length}</p>
+      <p>Total Anomalies: {runs.flatMap(run => run.anomalies).length}</p>
         <MetricsPreview2 runs={runs}></MetricsPreview2>
       </section>
 
@@ -112,67 +104,42 @@ export default FloraHiveMetrics;
 
 export async function SimulateRun(settings: RunSimulationSettings) {
   const endpoint = "http://REDACTED/api/sim/run";
-    let token: string | null = null;
 
-  try {
-    const postResponse = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(settings)
-    });
+  const postResponse = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(settings)
+  });
 
-    if (!postResponse.ok) {
-      throw new Error(`POST failed: ${postResponse.status}`);
-    }
-
-    const result = await postResponse.json();
-    token = result.token;
-    console.log(result);
-  }
-  catch(err) {
-    console.log(err);
+  if (!postResponse.ok) {
+    throw new Error(`POST failed: ${postResponse.status}`);
   }
 
-  // Get All Runs
-  if (token != null) {
-    return GetAllRuns(token);
-  }
-  return [];
+  const result = await postResponse.json();
+  const token: string = result.token;
+
+  const runs = await GetAllRuns(token);
+
+  return { token, runs };
 }
 
-export async function GetAllRuns(token: string) {
-  const endpoint = "http://REDACTED/api/sim/run";
+export async function GetAllRuns(token: string, userRuns: boolean = true): Promise<Run[]> {
+  let endpoint = "http://REDACTED/api/sim/run";
+  if (!userRuns) { endpoint += "/all"; }
 
-  try {
-    const getResponse = await fetch(endpoint, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    });
-    if (!getResponse.ok) {
-      throw new Error(`GET failed: ${getResponse.status}`);
+  const getResponse = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      ...(userRuns && token
+        ? { "Authorization": `Bearer ${token}` }
+        : {})
     }
-    const data: Run[] = await getResponse.json();
-    const allRuns: Run[] = data.map((r: any) => ({
-      Mutations: r.mutations.map((m: any) => ({
-        Resets: m.resets,
-        RunCount: m.runCount,
-        Battle: m.battle,
-        Wave: m.wave,
-        MutationName: m.mutationName,
-        MutationCount: m.mutationCount
-      })),
-      Battles: r.battles,
-      Waves: r.waves,
-      Anomalies: r.anomalies
-    }));
-    console.log(data);
-    return allRuns;
+  });
+
+  if (!getResponse.ok) {
+    throw new Error(`GET failed: ${getResponse.status}`);
   }
-  catch(err) {
-    console.log(err);
-  }
-  return []
+
+  return getResponse.json();
 }

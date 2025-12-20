@@ -32,19 +32,19 @@ function MetricsPreview2(props: MetricsPreviewProps) {
     const counts = new Map<string, { key: Key; count: number }>();
 
     props.runs.forEach(run => {
-      run.Mutations.forEach(mutation => {
-        const battle = mutation.Battle;
-        const wave = mutation.Wave;
+      run.mutations.forEach(mutation => {
+        const battle = mutation.battle;
+        const wave = mutation.wave;
 
         const mapKey = `${battle}:${wave}`;
 
         const entry = counts.get(mapKey);
         if (entry) {
-          entry.count += Math.max(0, mutation.MutationCount);
+          entry.count += Math.max(0, mutation.mutationCount);
         } else {
           counts.set(mapKey, {
             key: { battle, wave },
-            count: mutation.MutationCount,
+            count: mutation.mutationCount,
           });
         }
       });

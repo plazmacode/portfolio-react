@@ -1,8 +1,8 @@
 export type Mutation = {
-  Resets: number
-  RunCount: number
-  Battle: number
-  Wave: number
-  MutationName: string
-  MutationCount: number
+  resets: number
+  runCount: number
+  battle: number
+  wave: number
+  mutationName: string
+  mutationCount: number
 }

@@ -4,8 +4,8 @@ import type { Mutation } from "./Mutation";
 import type { Wave } from "./Wave";
 
 export type Run = {
-  Mutations: Mutation[]
-  Battles: Battle[]
-  Waves: Wave[]
-  Anomalies: Anomaly[]
+  mutations: Mutation[]
+  battles: Battle[]
+  waves: Wave[]
+  anomalies: Anomaly[]
 }
