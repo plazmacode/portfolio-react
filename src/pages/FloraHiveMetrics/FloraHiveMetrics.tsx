@@ -55,6 +55,7 @@ function FloraHiveMetrics() {
         <p>FloraHive Metrics</p>
       </div>
       <section className="content header-spacing">
+      <h1 className="blue mb-4">Interactive simulation of the FloraHive Metrics</h1>
       <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger me-2">Simulate Run</button>
       <button  onClick={() => setShowAllUsers(!showAllUsers)} className={`btn ${showAllUsers ? 'btn-outline-primary' : 'btn-primary'}`}>
         {showAllUsers ? "Showing: All Users" : "Showing: My Runs Only"}

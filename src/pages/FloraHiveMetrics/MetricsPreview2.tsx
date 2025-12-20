@@ -24,72 +24,84 @@ function MetricsPreview2(props: MetricsPreviewProps) {
     const chart = getInstanceByDom(chartRef.current);
     if (!chart) return;
 
-    type Key = {
+    type DataPoint = {
       battle: number;
       wave: number;
+      mutationCount: number;
+      energyGained: number;
     };
-    // Aggregate mutations by Battle/Wave
-    const counts = new Map<string, { key: Key; count: number }>();
 
+    const statsMap = new Map<string, DataPoint>();
     props.runs.forEach(run => {
-      run.mutations.forEach(mutation => {
-        const battle = mutation.battle;
-        const wave = mutation.wave;
+      run.mutations.forEach(m => {
+        const key = `${m.battle}:${m.wave}`;
+        const existing = statsMap.get(key) || { battle: m.battle, wave: m.wave, mutationCount: 0, energyGained: 0 };
+        existing.mutationCount += Math.max(0, m.mutationCount);
+        statsMap.set(key, existing);
+      });
 
-        const mapKey = `${battle}:${wave}`;
+      run.waves.forEach(battleGroup => {
+        battleGroup.forEach(w => {
+          
+          const b = w.battleCount;
+          const wv = w.waveCount;
+          const energy = w.energyGained;
 
-        const entry = counts.get(mapKey);
-        if (entry) {
-          entry.count += Math.max(0, mutation.mutationCount);
-        } else {
-          counts.set(mapKey, {
-            key: { battle, wave },
-            count: mutation.mutationCount,
-          });
-        }
+          if (b !== undefined && wv !== undefined) {
+            const key = `${b}:${wv}`;
+            const existing = statsMap.get(key) || { battle: b, wave: wv, mutationCount: 0, energyGained: 0 };
+            
+            existing.energyGained += (energy || 0);
+            statsMap.set(key, existing);
+          }
+        });
       });
     });
 
     // Sort numerically battle -> wave (battle1, wave1, wave2, wave3... battle2, wave1, wave2, wave3)
-    const ordered = Array.from(counts.values()).sort((a, b) => {
-      if (a.key.battle !== b.key.battle) {
-        return a.key.battle - b.key.battle;
-      }
-      return a.key.wave - b.key.wave;
-    });
-
-    // Convert to arrays for Echarts x,y axis
-    const categories = ordered.map(
-      e => `B${e.key.battle}-W${e.key.wave}`
+    const ordered = Array.from(statsMap.values()).sort((a, b) => 
+      a.battle !== b.battle ? a.battle - b.battle : a.wave - b.wave
     );
 
-    const values = ordered.map(e => e.count);
+    // Convert to arrays for Echarts x,y axis
+    const categories = ordered.map(e => `B${e.battle}-W${e.wave}`);
+    const mutationValues = ordered.map(e => e.mutationCount);
+    const energyValues = ordered.map(e => e.energyGained);
 
     const option: EChartsOption = {
       tooltip: {
         trigger: "axis",
-        axisPointer: { type: "shadow" },
+        axisPointer: { type: "cross" }, // Changed to cross for better dual-axis tracking
       },
+      legend: { data: ["Mutation Count", "Energy Gained"] },
       xAxis: {
         type: "category",
         data: categories,
-        axisLabel: {
-          rotate: 45,
-        },
+        axisLabel: { rotate: 45 },
       },
-      yAxis: {
-        type: "value",
-        name: "Mutation Count",
-      },
+      yAxis: [
+        { type: "value", name: "Mutations", position: "left" },
+        { type: "value", name: "Energy", position: "right" } // Added second Y-axis
+      ],
       series: [
         {
+          name: "Mutation Count",
           type: "bar",
-          data: values,
+          data: mutationValues,
+          itemStyle: { color: "#dc3545" } // Match your btn-danger color
+        },
+        {
+          name: "Energy Gained",
+          type: "line", // The requested line series
+          yAxisIndex: 1, // Link to the right Y-axis
+          data: energyValues,
+          smooth: true,
+          itemStyle: { color: "#0d6efd" } // Bootstrap Primary blue
         },
       ],
     };
     chart.setOption(option);
-  }, [props.runs]);
+}, [props.runs]);
 
   return (
     <div
