@@ -43,7 +43,6 @@ function FloraHiveMetrics() {
     try {
       const { token, runs } = await SimulateRun(settings);
       setToken(token);
-      setShowAllUsers(false); // Switch to private view to see the new run
       setRuns(runs);
     } catch (error) {
       console.error("Failed:", error);
