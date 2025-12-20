@@ -1,0 +1,7 @@
+.infobox-main {
+  text-transform: uppercase;
+  font-size: 76px;
+  color: var(--main-text-color);
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+}

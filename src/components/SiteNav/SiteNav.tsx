@@ -35,15 +35,15 @@ const SiteNav: React.FC = () => {
     expand="lg"
     fixed="top">
       <Container fluid className="px-5">
-        <Navbar.Brand as={NavLink} to="/">Tobias Krogshede</Navbar.Brand>
+        <div className="d-flex flex-column">
+          <Navbar.Brand as={NavLink} to="/">Tobias Krogshede</Navbar.Brand>
+          <p className='navbar-brand-subtitle'>Software Developer</p>
+        </div>
+
         <Nav className="ms-auto">
-          <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+          <Nav.Link as={NavLink} to="/works">Works</Nav.Link>
+          <Nav.Link as={NavLink} to="/interactive">Interactive</Nav.Link>
           <Nav.Link as={NavLink} to="/about">About</Nav.Link>
-          <NavDropdown title="FloraHive" id="collapsible-nav-dropdown">
-            <NavDropdown.Item as={NavLink} to="/florahive">FloraHive</NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to="/florahive-metrics">FloraHive Metrics</NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to="/gamebox">GameBox</NavDropdown.Item>
-          </NavDropdown>
         </Nav>
       </Container>
     </Navbar>

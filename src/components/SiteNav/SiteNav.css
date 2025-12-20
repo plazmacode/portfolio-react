@@ -1,42 +1,27 @@
-/* Navbar when scrolled */
-.navbar-scrolled {
-  background-color: rgb(30, 30, 40);
-  transition: background-color 0.3s ease;
+/* .navbar-brand */
+.navbar .navbar-brand,
+.navbar .navbar-brand:focus,
+.navbar .navbar-brand:active {
+  color: var(--main-text-color);
+  transition: color 0.12s ease-in-out;
 }
 
-/* Make all links white */
-.navbar-scrolled .nav-link,
-.navbar-scrolled .navbar-brand,
-.navbar-scrolled .dropdown-toggle {
-  color: white;
+.navbar .navbar-brand:hover {
+  color: var(--hover-text-color);
 }
 
-/* Active link color */
-.navbar-scrolled .nav-link.active {
-  color: #d1b932 !important;
+.navbar-brand-subtitle {
+  color: var(--text2-color);
 }
 
-.navbar-scrolled .dropdown-menu {
-  background-color: rgb(30, 30, 40);
+/* nav-link */
+.navbar .nav-link,
+.navbar .nav-link:focus,
+.navbar .nav-link:active {
+  color: var(--main-text-color);
+  transition: color 0.12 ease-in-out;
 }
 
-.navbar-scrolled .dropdown-item {
-  color: white !important;
-}
-
-.navbar-scrolled .dropdown-item:hover {
-  background-color: #333;
-  color: #d1b932 !important;
-}
-
-.navbar-scrolled .nav-link:hover {
-  color: #d1b932;
-}
-
-.navbar-scrolled #collapsible-nav-dropdown:focus {
-  color: white !important;
-}
-
-#collapsible-nav-dropdown:focus {
-  color: black !important;
+.navbar .nav-link:hover {
+  color: var(--hover-text-color);
 }

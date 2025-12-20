@@ -1,5 +1,10 @@
 #root {
-  background-color: rgb(255, 255, 255);
+  --main-color: oklch(0.1776 0 0);
+  --main-text-color: oklch(1 0 0);
+  --hover-text-color: oklch(0.75 0 0);
+  --text2-color: oklch(0.6 0 0);
+
+  background-color: var(--main-color);
   height: 100vh;
 }
 
