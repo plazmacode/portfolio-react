@@ -60,14 +60,13 @@ p, h1, h2, h3, h4 {
 }
 
 .d-flex:has(.image-card:hover) .image-card {
-  filter: blur(1px) brightness(0.8);
+  filter: blur(0.5px) brightness(0.9);
 }
 
 .d-flex .image-card:hover {
   filter: blur(0) brightness(1) !important;
   transform: perspective(1200px) scale(1.1) rotateX(10deg) rotateY(0deg);
-  box-shadow: 0 20px 20px oklch(90.447% 0.13339 168.9 / 0.274);
-  z-index: 10;
+  box-shadow: 0 10px 10px oklch(81.381% 0.11915 169.82 / 0.222);
 }
 
 .navbar-alt .navbar-brand {
