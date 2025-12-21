@@ -1,0 +1,40 @@
+.work-card {
+  background: #333333;
+  background: linear-gradient(140deg, #292929, #403333);
+  width: 100%;
+  /* height: 600px; */
+}
+
+.work-title {
+  margin-bottom: 0px;
+  font-weight: 600;
+}
+
+.work-subtitle {
+  color: var(--red) !important;
+  margin-bottom: 5px;
+  font-weight: 150;
+}
+
+.work-image {
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.work-button {
+  background: var(--red);
+  color: white;
+  font-family: Inter, sans-serif;
+  border: none;
+  padding: 10px 40px;
+  font-weight: 300;
+  margin-right: 20px;
+  font-size: 24px;
+  transition: filter 0.2s ease;
+  cursor: pointer;
+}
+
+.work-button:hover {
+  filter: brightness(75%);
+}

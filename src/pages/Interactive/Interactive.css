@@ -1,0 +1,9 @@
+.interactive-card {
+  background: var(--bg-gradient2);
+  width: 100%;
+}
+
+.interactive-card section p {
+  font-size: 18px;
+  margin-bottom: 5px;
+}

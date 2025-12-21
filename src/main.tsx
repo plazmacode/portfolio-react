@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './Layout.tsx';
 import About from './pages/About/About';
 import FloraHive from './pages/FloraHive/FloraHive.tsx';
+import Works from './pages/Works/Works.tsx';
+import Interactive from './pages/Interactive/Interactive.tsx';
 import FloraHiveMetrics from './pages/FloraHiveMetrics/FloraHiveMetrics.tsx';
 import Gamebox from './pages/Gamebox/Gamebox.tsx';
 import PageNotFound from './pages/PageNotFound/PageNotFound.tsx';
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
       { path: "/florahive", element: <FloraHive/>},
       { path: "/florahive-metrics", element: <FloraHiveMetrics/>},
       { path: "/gamebox", element: <Gamebox/>},
+      { path: "/works", element: <Works/>},
+      { path: "/interactive", element: <Interactive/>},
       { path: "*", element: <PageNotFound/>}
     ]
   }

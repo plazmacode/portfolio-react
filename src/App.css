@@ -3,10 +3,13 @@
   --main-text-color: oklch(1 0 0);
   --hover-text-color: oklch(0.75 0 0);
   --text2-color: oklch(0.6 0 0);
+  --red: oklch(54.572% 0.17798 12.98);
+  --bg-gradient: linear-gradient(140deg, #292929, #403333);
+  --bg-gradient2: linear-gradient(140deg, #252222, #282525);
+  --bg-gradient3: linear-gradient(0deg, #171717, #2c2c2c);
 }
 
 #root {
-
   background-color: var(--main-color);
   height: 100vh;
 }
@@ -25,11 +28,20 @@ p, h1, h2, h3, h4 {
   font-weight: 150;
 }
 
+.card-line {
+  width: 100%;
+  height: 3px;
+  background: var(--red);
+}
+
 .header-spacing {
   padding-top: 50px;
 }
 
 .header-spacing-2 {
+  padding-top: 150px;
+}
+.m-header-spacing-2 {
   padding-top: 150px;
 }
 
@@ -66,21 +78,9 @@ p, h1, h2, h3, h4 {
 .d-flex .image-card:hover {
   filter: blur(0) brightness(1) !important;
   transform: perspective(1200px) scale(1.1) rotateX(10deg) rotateY(0deg);
-  box-shadow: 0 10px 10px oklch(81.381% 0.11915 169.82 / 0.222);
+  box-shadow: 0 5px 10px var(--red);
 }
 
-.navbar-alt .navbar-brand {
-  color: white;
-}
-
-.navbar-alt .nav-link {
-  color: white;
-}
-
-.navbar-alt .nav-link.active {
-  color: #d1b932 !important;
-}
-
-.navbar-alt .nav-link:hover {
-  color: #d1b932;
+.navbar-scrolled {
+  background-color: var(--main-color);
 }
