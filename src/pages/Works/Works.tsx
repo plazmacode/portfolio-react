@@ -22,7 +22,7 @@ function Works() {
           <br></br><br></br>
           My main role has been working on the more complex systems. Not only game mechanics but also a backend system that collects metrics data on the players, used to balance the game. 
           <br></br><br></br>
-          The game is made in Unity with C#. The backend uses ASP.NET and is implemented with Docker, PostgreSQL using micro services
+          The game is made in Unity with C#. The backend uses ASP.NET and is implemented with Docker, PostgreSQL using micro services.
           </>
         ),
         mainImage: FloraHiveLogo,
