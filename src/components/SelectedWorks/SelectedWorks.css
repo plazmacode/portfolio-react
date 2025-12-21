@@ -1,29 +1,16 @@
-.previews-title h2{
-  text-align: center;
+.image-card {
+  transition: all 0.2s ease-in-out;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  border-radius: 1.5rem;
+  -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.1));
 }
 
-.previews-content {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
-  min-height: 300px;
+.d-flex:has(.image-card:hover) .image-card {
+  filter: blur(0.5px) brightness(0.9);
 }
 
-.previews-content > div {
-  padding: 10px;
-  text-align: center;
-  flex: 1 1 200px;
-  max-width: 400px;
-  border-radius: 8px;
-}
-
-.previews-content img {
-  width: 100%;     /* Make images fill the box */
-  height: auto;
-  display: block;  /* Remove extra bottom space */
-}
-
-.previews-content p {
-  font-size: 18px;
+.d-flex .image-card:hover {
+  filter: blur(0) brightness(1) !important;
+  transform: perspective(1200px) scale(1.1) rotateX(10deg) rotateY(0deg);
+  box-shadow: 0 5px 10px var(--red);
 }
