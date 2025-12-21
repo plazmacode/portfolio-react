@@ -78,6 +78,7 @@ function MetricsPreview2() {
   const [runs, setRuns] = useState<Run[]>([]);
   const [token, setToken] = useState<string>("");
   const [showAllUsers, setShowAllUsers] = useState<boolean>(true);
+  const [runCount, setRunCount] = useState<number>(1);
 
   const fetchRuns = async (allUsers: boolean) => {
     if (!allUsers && !token) {
@@ -97,6 +98,7 @@ function MetricsPreview2() {
   }, [showAllUsers, token]);
 
   const handleSimulateNewRun = async () => {
+    const finalCount = Math.min(Math.max(runCount, 1), 50);
     const settings: RunSimulationSettings = {
       InitialPlayerHealth: 15,
       BattlesPerRun: 5,
@@ -109,7 +111,7 @@ function MetricsPreview2() {
     }
 
     try {
-      const { token, runs } = await SimulateRun(settings);
+      const { token, runs } = await SimulateRun(settings, finalCount);
       setToken(token);
       setRuns(runs);
     } catch (error) {
@@ -202,7 +204,25 @@ function MetricsPreview2() {
   return (
     <>
       <section className="p-3">
-        <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger me-2 mb-2">Simulate Run</button>
+        <div className="d-flex">
+          <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger me-2 mb-2">Simulate {runCount > 1 ? `${runCount} Runs` : 'Run'}</button>
+          <div style={{ width: '70px' }}>
+            <input 
+              type="number" 
+              className="form-control" 
+              value={runCount} 
+              min="1" 
+              max="50"
+              onChange={(e) => setRunCount(parseInt(e.target.value) || 1)}
+              onBlur={() => {
+                if (runCount < 1) setRunCount(1);
+                if (runCount > 50) setRunCount(50);
+              }}
+            />
+          </div>
+
+        </div>
+
         <button onClick={() => setShowAllUsers(!showAllUsers)} className={`btn ${showAllUsers ? 'btn-outline-primary mb-2' : 'btn-primary mb-2'}`}>
           {showAllUsers ? "Showing: All Users" : "Showing: My Runs Only"}
         </button>
@@ -220,8 +240,8 @@ function MetricsPreview2() {
 export default MetricsPreview2;
 
 
-export async function SimulateRun(settings: RunSimulationSettings) {
-  const endpoint = "http://REDACTED/api/sim/run/1";
+export async function SimulateRun(settings: RunSimulationSettings, count: number) {
+  const endpoint = `http://REDACTED/api/sim/run/${count}`;
 
   const postResponse = await fetch(endpoint, {
     method: "POST",
@@ -235,7 +255,6 @@ export async function SimulateRun(settings: RunSimulationSettings) {
 
   const result = await postResponse.json();
   const token: string = result.token;
-
   const runs = await GetAllRuns(token);
 
   return { token, runs };
