@@ -8,15 +8,15 @@ function SelectedWorks() {
     <>
     <div className="d-flex flex-row" style={{gap: '80px'}}>
       <div>
-        <img src={FloraHiveGameplay} className="rounded-4" style={{ width: '320px' }}></img>
+        <img src={FloraHiveGameplay} className="image-card" style={{ width: '320px' }}></img>
       </div>
       <div>
-        <img src={FloraHiveMetrics} className="rounded-4" style={{ width: '320px' }}></img>
+        <img src={FloraHiveMetrics} className="image-card" style={{ width: '320px' }}></img>
       </div>
       <div>
-        <img src={GameBox} className="rounded-4" style={{ width: '320px' }}></img>
+        <img src={GameBox} className="image-card" style={{ width: '320px' }}></img>
       </div>
-      </div>
+    </div>
     </>
   )
 }

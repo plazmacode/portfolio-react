@@ -1,11 +1,40 @@
-#root {
+:root {
   --main-color: oklch(0.1776 0 0);
   --main-text-color: oklch(1 0 0);
   --hover-text-color: oklch(0.75 0 0);
   --text2-color: oklch(0.6 0 0);
+}
+
+#root {
 
   background-color: var(--main-color);
   height: 100vh;
+}
+
+body {
+  background-color: var(--main-color) !important;
+}
+
+p {
+  font-size: 24px
+}
+
+p, h1, h2, h3, h4 {
+  color: var(--main-text-color) !important;
+  font-family: Inter, sans-serif;
+  font-weight: 150;
+}
+
+.header-spacing {
+  padding-top: 50px;
+}
+
+.header-spacing-2 {
+  padding-top: 150px;
+}
+
+.fw-3 {
+  font-weight: 300;
 }
 
 .nav-container {
@@ -18,17 +47,27 @@
   margin: 0 auto;
 }
 
-.page-title {
-  min-height: 250px;
-  background-color: rgb(30, 30, 40);
-  display:flex;
-  justify-content: center;
-  align-items: center;
+.content-2 {
+  width: 75%;
+  margin: 0 auto;
 }
 
-.page-title p {
-  color: white;
-  font-size: 50px;
+.image-card {
+  transition: all 0.2s ease-in-out;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  border-radius: 1.5rem;
+  -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.1));
+}
+
+.d-flex:has(.image-card:hover) .image-card {
+  filter: blur(1px) brightness(0.8);
+}
+
+.d-flex .image-card:hover {
+  filter: blur(0) brightness(1) !important;
+  transform: perspective(1200px) scale(1.1) rotateX(10deg) rotateY(0deg);
+  box-shadow: 0 20px 20px oklch(90.447% 0.13339 168.9 / 0.274);
+  z-index: 10;
 }
 
 .navbar-alt .navbar-brand {
@@ -45,57 +84,4 @@
 
 .navbar-alt .nav-link:hover {
   color: #d1b932;
-}
-
-.flex {
-  display: flex;
-  gap: 50px;
-}
-
-.header-spacing {
-  padding-top: 50px;
-}
-.footer-spacing {
-  padding-bottom: 50px;
-}
-
-.split {
-  display: flex;
-  width: 100%;
-}
-
-.row img {
-  max-width: 100%;
-}
-
-/* Make text paragraphs a bit lower vertically compared to the images*/
-.row div p:first-child {
-  padding-top: 15px;
-}
-
-
-.split > div:first-child {
-  margin-right: 50px; /* space between columns */
-  flex-basis: 50%;
-}
-
-.split > div:last-child {
-  flex-basis: 50%;
-}
-
-.heading {
-  padding-top: 20px;
-  padding-bottom: 50px;
-  padding-left: 10px;
-}
-
-.home-footer {
-  padding-top: 100px;
-  text-align:center;
-  font-size: 24px;
-  padding-bottom: 20px;
-}
-
-.blue {
-  color: #226e93;
 }
