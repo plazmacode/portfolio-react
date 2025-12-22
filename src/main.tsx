@@ -13,6 +13,7 @@ import App from './App.tsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
+import FloraHiveWorks from './pages/Works/FloraHive/FloraHiveWorks.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/florahive-metrics", element: <FloraHiveMetrics/>},
       { path: "/gamebox", element: <Gamebox/>},
       { path: "/works", element: <Works/>},
+      { path: "/works/florahive", element: <FloraHiveWorks/>},
       { path: "/interactive", element: <Interactive/>},
       { path: "*", element: <PageNotFound/>}
     ]

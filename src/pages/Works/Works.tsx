@@ -27,7 +27,7 @@ function Works() {
         ),
         mainImage: FloraHiveLogo,
         techStack: [NET, CSharp, Unity, Docker, PostgreSQL],
-        buttons: [{ label: "Code examples" }, { label: "Metrics backend" }]
+        buttons: [ {label: "Learn More", link: "/works/florahive"}, { label: "Metrics backend" }]
       },
       {
         title: "Conversio Hub",
@@ -42,7 +42,7 @@ function Works() {
         ),
         mainImage: ConversioHub,
         techStack: [Django, Python, Docker, PostgreSQL],
-        buttons: []
+        buttons: [{label: "Learn More"}]
       }
     ];
 

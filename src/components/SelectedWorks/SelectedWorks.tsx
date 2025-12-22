@@ -8,7 +8,9 @@ function SelectedWorks() {
     <>
     <div className="d-flex flex-row" style={{gap: '80px'}}>
       <div>
-        <img src={FloraHiveGameplay} className="image-card" style={{ width: '320px' }}></img>
+        <a href="/works#FloraHive">
+          <img src={FloraHiveGameplay} className="image-card" style={{ width: '320px' }}></img>
+        </a>
       </div>
       <div>
         <img src={FloraHiveMetrics} className="image-card" style={{ width: '320px' }}></img>

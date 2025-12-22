@@ -79,6 +79,7 @@ function MetricsPreview2() {
   const [token, setToken] = useState<string>("");
   const [showAllUsers, setShowAllUsers] = useState<boolean>(true);
   const [runCount, setRunCount] = useState<number>(1);
+  const [connectionFailed, setConnectionFailed] = useState<boolean>(true);
 
   const fetchRuns = async (allUsers: boolean) => {
     if (!allUsers && !token) {
@@ -88,8 +89,10 @@ function MetricsPreview2() {
     try {
       const result = await GetAllRuns(token, !allUsers);
       setRuns(result);
+      setConnectionFailed(false);
     } catch (error) {
       console.error("Failed to fetch runs:", error);
+      setConnectionFailed(true);
     }
   };
 
@@ -114,8 +117,10 @@ function MetricsPreview2() {
       const { token, runs } = await SimulateRun(settings, finalCount);
       setToken(token);
       setRuns(runs);
+      setConnectionFailed(false);
     } catch (error) {
       console.error("Failed:", error);
+      setConnectionFailed(true);
     }
   };
 
@@ -203,6 +208,15 @@ function MetricsPreview2() {
 
   return (
     <>
+      {connectionFailed && (
+        <div className="alert alert-danger d-flex align-items-center mt-2" role="alert">
+          <span className="me-2">⚠️</span>
+          <div>
+            <strong>Connection Failed:</strong> Unable to reach the simulation API. Oops maybe my backend server isn't running!
+          </div>
+        </div>
+      )}
+
       <section className="p-3">
         <div className="d-flex">
           <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger me-2 mb-2">Simulate {runCount > 1 ? `${runCount} Runs` : 'Run'}</button>

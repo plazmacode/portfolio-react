@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 
 function WorkCard({project}: WorkCardProps) {
   return (
-    <div className="work-card mt-5">
+    <div className="work-card mt-5" id={project.title}>
       <div className="card-line"></div>
       <div className="p-4">
-        <p className="work-title">{project.title}</p>
+        <h1 className="work-title">{project.title}</h1>
         <p className="work-subtitle">{project.subtitle}</p>
 
         <div className="row justify-content-between">
@@ -24,7 +24,7 @@ function WorkCard({project}: WorkCardProps) {
           </div>
           <div>
             {project.buttons.map((btn, index) => (
-              <button key={index} className="work-button">{btn.label}</button>
+              <a key={index} href={btn.link} className="work-button">{btn.label}</a>
             ))}
           </div>
         </div>
