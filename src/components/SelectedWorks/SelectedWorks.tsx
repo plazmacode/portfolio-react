@@ -13,7 +13,9 @@ function SelectedWorks() {
         </a>
       </div>
       <div>
-        <img src={FloraHiveMetrics} className="image-card" style={{ width: '320px' }}></img>
+        <a href="/works/floraHive-metrics">
+          <img src={FloraHiveMetrics} className="image-card" style={{ width: '320px' }}></img>
+        </a>
       </div>
       <div>
         <img src={GameBox} className="image-card" style={{ width: '320px' }}></img>

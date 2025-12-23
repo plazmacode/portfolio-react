@@ -27,7 +27,11 @@ function Works() {
         ),
         mainImage: FloraHiveLogo,
         techStack: [NET, CSharp, Unity, Docker, PostgreSQL],
-        buttons: [ {label: "Learn More", link: "/works/florahive"}, { label: "Metrics backend" }]
+        buttons: [
+          {label: "Learn More", link: "/works/florahive"},
+          {label: "Metrics Backend", link: "/works/florahive-metrics"},
+          {label: "Metrics Demo", link: "/interactive"}
+        ]
       },
       {
         title: "Conversio Hub",

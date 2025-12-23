@@ -8,12 +8,13 @@ import Works from './pages/Works/Works.tsx';
 import Interactive from './pages/Interactive/Interactive.tsx';
 import FloraHiveMetrics from './pages/FloraHiveMetrics/FloraHiveMetrics.tsx';
 import Gamebox from './pages/Gamebox/Gamebox.tsx';
+import FloraHiveWorks from './pages/Works/FloraHive/FloraHiveWorks.tsx';
+import MetricsWorks from './pages/Works/FloraHiveMetrics/MetricsWorks.tsx';
 import PageNotFound from './pages/PageNotFound/PageNotFound.tsx';
 import App from './App.tsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
-import FloraHiveWorks from './pages/Works/FloraHive/FloraHiveWorks.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/gamebox", element: <Gamebox/>},
       { path: "/works", element: <Works/>},
       { path: "/works/florahive", element: <FloraHiveWorks/>},
+      { path: "/works/florahive-metrics", element: <MetricsWorks/>},
       { path: "/interactive", element: <Interactive/>},
       { path: "*", element: <PageNotFound/>}
     ]
