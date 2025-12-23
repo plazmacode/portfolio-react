@@ -3,13 +3,6 @@ import { init, getInstanceByDom, type EChartsOption } from "echarts";
 import type { Run } from "./Models/Run";
 import type { RunSimulationSettings } from "./Models/RunSimulationSettings";
 import "./FloraHiveMetrics.css";
-type DataPoint = {
-  battle: number;
-  wave: number;
-  mutationCount: number;
-  energyGained: number;
-  count: number;
-};
 
 function processAverages(runs: Run[]) {
   const statsMap = new Map<string, {
@@ -79,7 +72,7 @@ function MetricsPreview2() {
   const [token, setToken] = useState<string>("");
   const [showAllUsers, setShowAllUsers] = useState<boolean>(true);
   const [runCount, setRunCount] = useState<number>(1);
-  const [connectionFailed, setConnectionFailed] = useState<boolean>(true);
+  const [connectionFailed, setConnectionFailed] = useState<boolean>(false);
 
   const fetchRuns = async (allUsers: boolean) => {
     if (!allUsers && !token) {
@@ -96,6 +89,22 @@ function MetricsPreview2() {
     }
   };
 
+  // Automatic retry pattern for connection.
+  useEffect(() => {
+    let interval: number | undefined;
+
+    if (connectionFailed) {
+      interval = window.setInterval(() => {
+        console.log("Attempting to reconnect...");
+        fetchRuns(showAllUsers);
+      }, 5000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [connectionFailed, showAllUsers]);
+  
   useEffect(() => {
     fetchRuns(showAllUsers);
   }, [showAllUsers, token]);
@@ -148,7 +157,6 @@ function MetricsPreview2() {
       tooltip: {
         trigger: "axis",
         axisPointer: { type: "cross" },
-        // Formatting tooltip to show decimals nicely
         valueFormatter: (value: any) => Number(value).toFixed(2)
       },
       legend: {
@@ -185,7 +193,7 @@ function MetricsPreview2() {
       series: [
         {
           name: "Avg Mutation Count",
-          type: "line", // Changed to line as requested
+          type: "line",
           data: data.map(d => d.avgMutations),
           itemStyle: { color: "#dc3545" },
           smooth: true,
@@ -208,15 +216,6 @@ function MetricsPreview2() {
 
   return (
     <>
-      {connectionFailed && (
-        <div className="alert alert-danger d-flex align-items-center mt-2" role="alert">
-          <span className="me-2">⚠️</span>
-          <div>
-            <strong>Connection Failed:</strong> Unable to reach the simulation API. Oops maybe my backend server isn't running!
-          </div>
-        </div>
-      )}
-
       <section className="p-3">
         <div className="d-flex">
           <button onClick={handleSimulateNewRun} type="button" className="btn btn-danger me-2 mb-2">Simulate {runCount > 1 ? `${runCount} Runs` : 'Run'}</button>
@@ -232,7 +231,7 @@ function MetricsPreview2() {
                 if (runCount < 1) setRunCount(1);
                 if (runCount > 50) setRunCount(50);
               }}
-            />
+              />
           </div>
 
         </div>
@@ -240,6 +239,15 @@ function MetricsPreview2() {
         <button onClick={() => setShowAllUsers(!showAllUsers)} className={`btn ${showAllUsers ? 'btn-outline-primary mb-2' : 'btn-primary mb-2'}`}>
           {showAllUsers ? "Showing: All Users" : "Showing: My Runs Only"}
         </button>
+      {connectionFailed && (
+        <div className="alert alert-danger d-flex align-items-center mt-2" role="alert">
+          <div className="spinner-border spinner-border-sm me-3" role="status"></div>
+          <div>
+            <strong>Connection Lost:</strong> Attempting to reach the API... 
+            <small className="d-block">Oopsie! My backend server might be offline.</small>
+          </div>
+        </div>
+      )}
         <p>Total Runs: {runs.length}</p>
         <p>Total Mutations: {runs.flatMap(run => run.mutations).length}</p>
         <p>Total Battles: {runs.flatMap(run => run.battles).length}</p>
@@ -270,7 +278,6 @@ export async function SimulateRun(settings: RunSimulationSettings, count: number
   const result = await postResponse.json();
   const token: string = result.token;
   const runs = await GetAllRuns(token);
-
   return { token, runs };
 }
 
@@ -287,7 +294,6 @@ export async function GetAllRuns(token: string, userRuns: boolean = true): Promi
         : {})
     }
   });
-
   if (!getResponse.ok) {
     throw new Error(`GET failed: ${getResponse.status}`);
   }

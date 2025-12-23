@@ -1,5 +1,5 @@
 .navbar {
-  background: #111111;
+  background: #111111bf;
   transition: all 0.5s ease-in-out;
   backdrop-filter: blur(25px);
 }
