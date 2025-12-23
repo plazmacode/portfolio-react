@@ -64,7 +64,7 @@ function processAverages(runs: Run[]) {
 
 /*
 Uses the Apache ECharts visualization library to build a chart.
-Shows mutations earned over a simulated run provided from the FloraHive Metrics API
+Shows various data from simulated runs provided by the FloraHive Metrics API
 */
 function MetricsPreview2() {
   const chartRef = useRef<HTMLDivElement | null>(null);
@@ -251,7 +251,7 @@ function MetricsPreview2() {
         <p>Total Runs: {runs.length}</p>
         <p>Total Mutations: {runs.flatMap(run => run.mutations).length}</p>
         <p>Total Battles: {runs.flatMap(run => run.battles).length}</p>
-        <p>Total Waves: {runs.flatMap(run => run.waves).length}</p>
+        <p>Total Waves: {runs.flatMap(run => run.waves).flat().length}</p>
         <p>Total Anomalies: {runs.flatMap(run => run.anomalies).length}</p>
         <div className="chart" ref={chartRef} style={{ width: "100%", height: "400px" }} />;
       </section>
