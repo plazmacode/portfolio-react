@@ -30,23 +30,26 @@ const SiteNav: React.FC = () => {
   }, []);
 
   return (
-    <Navbar
-    className={`${scrolled ? 'navbar-scrolled' : ''} ${isAltNav ? 'navbar-alt' : ''}`} 
-    expand="lg"
-    fixed="top">
-      <Container fluid className="px-5">
-        <div className="d-flex flex-column">
-          <Navbar.Brand as={NavLink} to="/">[ Tobias Krogshede ]</Navbar.Brand>
-          <p className='navbar-brand-subtitle'>Software Developer</p>
-        </div>
-
-        <Nav className="ms-auto">
-          <Nav.Link as={NavLink} to="/works">Works</Nav.Link>
-          <Nav.Link as={NavLink} to="/interactive">Interactive</Nav.Link>
-          <Nav.Link as={NavLink} to="/about">About</Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+    <section className="fixed-top">
+      <div className="nav-line nav-line-top"></div>
+      <Navbar
+      className={`${scrolled ? 'navbar-scrolled' : ''} ${isAltNav ? 'navbar-alt' : ''}`} 
+      expand="lg">
+        <Container fluid className="px-5">
+          <div className="d-flex flex-column">
+            <Navbar.Brand as={NavLink} to="/">[ Tobias Krogshede ]</Navbar.Brand>
+            <p className='navbar-brand-subtitle'>Software Developer</p>
+          </div>
+  
+          <Nav className="ms-auto">
+            <Nav.Link as={NavLink} to="/works">Works</Nav.Link>
+            <Nav.Link as={NavLink} to="/interactive">Interactive</Nav.Link>
+            <Nav.Link as={NavLink} to="/about">About</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <div className="nav-line nav-line-bottom"></div>
+    </section>
   );
 };
 

@@ -1,4 +1,13 @@
-/* .navbar-brand */
+.navbar {
+  background: #111111;
+  transition: all 0.5s ease-in-out;
+  backdrop-filter: blur(25px);
+}
+
+.navbar-scrolled {
+  background: #20090D46;
+}
+
 .navbar .navbar-brand,
 .navbar .navbar-brand:focus,
 .navbar .navbar-brand:active {
@@ -26,4 +35,21 @@
 .navbar .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
   color: var(--red) !important;
+}
+
+.nav-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--red);
+  z-index: -1;
+}
+
+.nav-line-top {
+  top: 0;
+}
+
+.nav-line-bottom {
+  bottom: 0px;
 }

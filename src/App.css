@@ -1,9 +1,10 @@
 :root {
-  --main-color: oklch(0.1776 0 0);
+  --main-color: oklch(17.764% 0.00002 271.152);
   --main-text-color: oklch(1 0 0);
   --hover-text-color: oklch(0.75 0 0);
   --text2-color: oklch(0.6 0 0);
   --red: oklch(54.572% 0.17798 12.98);
+  --purple: oklch(29.241% 0.03655 279.467);
   --bg-gradient: linear-gradient(140deg, #292929, #403333);
   --bg-gradient2: linear-gradient(140deg, #252222, #282525);
   --bg-gradient3: linear-gradient(0deg, #171717, #2c2c2c);
@@ -57,11 +58,6 @@ li {
   font-weight: 300;
 }
 
-.nav-container {
-  max-width: 90vw;
-  width: 100%;
-}
-
 .content {
   width: 65%;
   margin: 0 auto;
@@ -70,8 +66,4 @@ li {
 .content-2 {
   width: 75%;
   margin: 0 auto;
-}
-
-.navbar-scrolled {
-  background-color: var(--main-color);
 }
