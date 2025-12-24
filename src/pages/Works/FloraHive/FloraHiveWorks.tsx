@@ -1,4 +1,3 @@
-import React from 'react';
 import { WorkSection, WorkCard2 } from '../../../components/WorkSection/WorkSection';
 import TerrainGeneration from "./TerrainGeneration.gif";
 import aStarExample from "./aStarExample.png";
