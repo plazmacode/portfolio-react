@@ -1,7 +1,6 @@
 import './App.css';
 import Infobox from './components/Infobox/Infobox';
 // import BlogList from './components/BlogList/BlogList'
-import Introduction from './components/Introduction/Introduction';
 import SelectedWorks from './components/SelectedWorks/SelectedWorks';
 
 function App() {

@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './Layout.tsx';
 import About from './pages/About/About';
-import FloraHive from './pages/FloraHive/FloraHive.tsx';
 import Works from './pages/Works/Works.tsx';
 import Interactive from './pages/Interactive/Interactive.tsx';
 import FloraHiveMetrics from './pages/FloraHiveMetrics/FloraHiveMetrics.tsx';
@@ -23,7 +22,6 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <App/> },
       { path:"/about", element: <About/>},
-      { path: "/florahive", element: <FloraHive/>},
       { path: "/florahive-metrics", element: <FloraHiveMetrics/>},
       { path: "/gamebox", element: <Gamebox/>},
       { path: "/works", element: <Works/>},
