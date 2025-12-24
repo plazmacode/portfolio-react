@@ -4,6 +4,7 @@ import Plot from "./Plot.png";
 import BackendCode from "./BackendCode.png";
 import Postgres from "./Postgres.png";
 import UML from "./UML.png";
+import { Link } from "react-router";
 
 function FloraHiveWorks() {
   return (
@@ -25,7 +26,7 @@ function FloraHiveWorks() {
             </ul>
             <p>I did the primary work designing and implementing the system so that we can collect data from our users and visualize it. On top of that our metrics backend includes a simple frontend for visualization using graphs made with plotly</p>
             <br></br>
-            <a href="/interactive" className="work-button">Metrics Demo</a>
+            <Link to="/interactive" className="work-button">Metrics Demo</Link>
           </>
         }
       />

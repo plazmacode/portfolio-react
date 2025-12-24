@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router';
+import { createHashRouter, RouterProvider } from 'react-router';
 import Layout from './Layout.tsx';
 import About from './pages/About/About';
 import Works from './pages/Works/Works.tsx';
@@ -15,13 +15,13 @@ import App from './App.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Layout/>,
     children: [
       { path: "", element: <App/> },
-      { path:"/about", element: <About/>},
+      { path: "/about", element: <About/>},
       { path: "/florahive-metrics", element: <FloraHiveMetrics/>},
       { path: "/gamebox", element: <Gamebox/>},
       { path: "/works", element: <Works/>},

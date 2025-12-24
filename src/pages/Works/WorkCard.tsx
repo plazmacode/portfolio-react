@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 
 function WorkCard({project}: WorkCardProps) {
   return (
@@ -24,7 +25,7 @@ function WorkCard({project}: WorkCardProps) {
           </div>
           <div>
             {project.buttons.map((btn, index) => (
-              <a key={index} href={btn.link} className="work-button">{btn.label}</a>
+              <Link key={index} to={btn.link || "#"} className="work-button">{btn.label}</Link>
             ))}
           </div>
         </div>
