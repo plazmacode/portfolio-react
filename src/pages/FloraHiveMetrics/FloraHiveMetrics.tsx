@@ -103,7 +103,7 @@ export default FloraHiveMetrics;
 
 
 export async function SimulateRun(settings: RunSimulationSettings) {
-  const endpoint = "http://REDACTED/api/sim/run/1";
+  const endpoint = `${import.meta.env.VITE_METRICS_BACKEND}/sim/run/1`;
 
   const postResponse = await fetch(endpoint, {
     method: "POST",
@@ -124,7 +124,7 @@ export async function SimulateRun(settings: RunSimulationSettings) {
 }
 
 export async function GetAllRuns(token: string, userRuns: boolean = true): Promise<Run[]> {
-  let endpoint = "http://REDACTED/api/sim/run";
+  let endpoint = `${import.meta.env.VITE_METRICS_BACKEND}/sim/run`;
   if (!userRuns) { endpoint += "/all"; }
 
   const getResponse = await fetch(endpoint, {
