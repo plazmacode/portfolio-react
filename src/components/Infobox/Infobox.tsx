@@ -38,7 +38,7 @@ function Infobox({ topText, bottomText }: InfoboxProps) {
 
     let iteration = 0;
     ref.current = setInterval(() => {
-      const scrambled = target.split("").map((letter, index) => {
+      const scrambled = target.split("").map((_letter, index) => {
         if (index < iteration) { // Finished letters
           return <span key={index}>{target[index]}</span>;
         }
