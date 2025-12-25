@@ -5,7 +5,7 @@ import Layout from './Layout.tsx';
 import About from './pages/About/About';
 import Works from './pages/Works/Works.tsx';
 import Interactive from './pages/Interactive/Interactive.tsx';
-import Gamebox from './pages/Gamebox/Gamebox.tsx';
+import Gamebox from './pages/Works/Gamebox/Gamebox.tsx';
 import FloraHiveWorks from './pages/Works/FloraHive/FloraHiveWorks.tsx';
 import MetricsWorks from './pages/Works/FloraHiveMetrics/MetricsWorks.tsx';
 import PageNotFound from './pages/PageNotFound/PageNotFound.tsx';
@@ -21,7 +21,7 @@ const router = createHashRouter([
     children: [
       { path: "", element: <App/> },
       { path: "/about", element: <About/>},
-      { path: "/gamebox", element: <Gamebox/>},
+      { path: "/works/gamebox", element: <Gamebox/>},
       { path: "/works", element: <Works/>},
       { path: "/works/florahive", element: <FloraHiveWorks/>},
       { path: "/works/florahive-metrics", element: <MetricsWorks/>},

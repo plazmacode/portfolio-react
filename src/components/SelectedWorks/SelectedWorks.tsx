@@ -19,11 +19,8 @@ function SelectedWorks() {
         </Link>
       </div>
       <div className="position-relative d-inline-block">
-        <Link to="#">
+        <Link to="/works/gamebox">
           <img src={GameBox} className="image-card" style={{ width: '320px' }}></img>
-          <div style={{ zIndex: 1 }}>
-            <p className="position-absolute top-50 start-50 translate-middle fw-bold text-white bg-dark bg-opacity-50 p-1 rounded fs-1">WIP</p>
-          </div>
         </Link>
       </div>
     </div>
