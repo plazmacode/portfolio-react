@@ -1,10 +1,15 @@
 import './Infobox.css';
 
-function Infobox() {
+interface InfoboxProps {
+  topText: string;
+  bottomText: string;
+}
+
+function Infobox({ topText, bottomText }: InfoboxProps) {
   return (
     <>
-      <h1 className="infobox-main">Tobias</h1>
-      <h1 className="infobox-main">Krogshede</h1>
+      <h1 className="infobox-main">{topText}</h1>
+      <h1 className="infobox-main">{bottomText}</h1>
     </>
   )
 }
