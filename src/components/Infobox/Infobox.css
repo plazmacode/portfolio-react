@@ -5,3 +5,8 @@
   font-weight: 600;
   font-family: Inter, sans-serif;
 }
+.scrambling {
+  color: var(--red);
+  opacity: 0.1;
+  transition: opacity 0.1s ease;
+}
