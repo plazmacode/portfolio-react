@@ -28,7 +28,10 @@ function About() {
           </audio>
           </div>
           <div className="col-md-6 d-flex justify-content-end align-items-start">
-            <img src={Tobias} className="img-fluid rounded" style={{ width: '420px' }} alt="Tobias" />
+            <div>
+              <img src={Tobias} className="img-fluid rounded" style={{ width: '420px' }} alt="Tobias" />
+              <p className="mt-3">tobiaskrogshede@gmail.com</p>
+            </div>
           </div>
         </div>
       </section>
