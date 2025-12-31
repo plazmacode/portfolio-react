@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createHashRouter, RouterProvider } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './Layout.tsx';
 import About from './pages/About/About';
 import Works from './pages/Works/Works.tsx';
@@ -14,19 +14,19 @@ import App from './App.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout />,
     children: [
-      { path: "", element: <App/> },
-      { path: "/about", element: <About/>},
-      { path: "/works/gamebox", element: <Gamebox/>},
-      { path: "/works", element: <Works/>},
-      { path: "/works/florahive", element: <FloraHiveWorks/>},
-      { path: "/works/florahive-metrics", element: <MetricsWorks/>},
-      { path: "/interactive", element: <Interactive/>},
-      { path: "*", element: <PageNotFound/>}
+      { index: true, element: <App /> },
+      { path: "about", element: <About /> },
+      { path: "works", element: <Works /> },
+      { path: "works/gamebox", element: <Gamebox /> },
+      { path: "works/florahive", element: <FloraHiveWorks /> },
+      { path: "works/florahive-metrics", element: <MetricsWorks /> },
+      { path: "interactive", element: <Interactive /> },
+      { path: "*", element: <PageNotFound /> }
     ]
   }
 ]);

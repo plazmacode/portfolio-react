@@ -2,7 +2,6 @@
   transition: all 0.2s ease-in-out;
   transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
   border-radius: 1.5rem;
-  -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.1));
 }
 
 .d-flex:has(.image-card:hover) .image-card {

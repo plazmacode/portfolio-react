@@ -30,7 +30,7 @@ function Infobox({ topText, bottomText }: InfoboxProps) {
   }, [bottomText]);
 
   function scrambleText(
-    target: string,
+    target_text: string,
     setter: (val: ReactNode[]) => void,
     ref: React.RefObject<number | null>
   ) {
@@ -39,9 +39,9 @@ function Infobox({ topText, bottomText }: InfoboxProps) {
     let iteration = 0;
     
     const animate = () => {
-      const scrambled = target.split("").map((_, index) => {
+      const scrambled = target_text.split("").map((_, index) => {
         if (index < iteration) {
-          return <span key={index}>{target[index]}</span>;
+          return <span key={index}>{target_text[index]}</span>;
         }
         return (
           <span key={index} className="scrambling">
@@ -52,7 +52,7 @@ function Infobox({ topText, bottomText }: InfoboxProps) {
 
       setter(scrambled);
 
-      if (iteration < target.length) {
+      if (iteration < target_text.length) {
         iteration += 0.5;
         ref.current = requestAnimationFrame(animate);
       }
