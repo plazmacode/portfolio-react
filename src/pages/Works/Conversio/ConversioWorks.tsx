@@ -1,8 +1,12 @@
-import { WorkSection } from "../../../components/WorkSection/WorkSection";
+import { WorkCard2, WorkSection } from "../../../components/WorkSection/WorkSection";
 import FrequencyStats from "./frequency stats.png";
 import LineAnalysis from "./line analysis.png";
 import AdService from "./ad service.png";
 import AdModel from "./ad model.png";
+import SetParams from "./set platform params.png";
+import SyncCompetitor from "./sync competitor.png";
+import fetchAds from "./fetch ads from source.png";
+import fetchAds2 from "./fetch ads from source 2.png";
 
 function FloraHiveWorks() {
   return (
@@ -63,6 +67,48 @@ function FloraHiveWorks() {
           </>
         }
       />
+      <WorkSection
+        title="LinkedIn Ad API"
+        image={[SetParams, SyncCompetitor]}
+        text={
+          <>
+            <p>Python is dynamically typed and also and doesn't give me many warnings if I do something wrong. Therefore I make sure to add variable types and return types to help provide linter warnings.</p>
+            <p>Now that the code is more maintainable we can see that for LinkedIn SearchAPI requires a specific engine name and parameters that were all found in their documentation.</p>
+            <br></br>
+            <br></br>
+            <p>The key to saving the ads for different pages is the sync_single_competitor function</p>
+            <p>I define the dictionary at the start which will be returned by this function.</p>
+            <p>The flow is pretty simple, first SearchAPI is fetched and then saved to the database if anything was found. Same goes with the LinkedIn API.</p>
+            <p>This is the service layer so all the error handling is in the controller (views.py class)</p>
+          </>
+        }
+      />
+      <WorkSection
+        title="Fetching ads"
+        image={[fetchAds, fetchAds2]}
+        text={
+          <>
+            <p>Fetching from their API uses tokens, so to save on those the first thing we do is check the cache.</p>
+            <p>This cache is based on the date range and page so that we fetch again on new pages or new date ranges</p>
+            <br></br>
+            <p>Some APIs are easier to navigate than others. For LinkedIn it was really troublesome to set the country param to Denmark in the param dictionary. Therefore I manually encode it when building the request url.</p>
+            <br></br>
+            <p>To make a request I just followed the documentation, which required these specific headers. I add a timeout to the request so when the frontend uses our endpoint it won't hang indefinitely.</p>
+            <p>The response data is to the records list because the API uses pagination and we will have to make multiple requests.</p>
+            <p>Lastly the response is saved to the cache. I chose 12 hours after having used the API and noticed that almost daily new ads are made by companies.</p>
+            <p>For me it is important as a programmer to figure these things out when given a task so that the end product will end up being more useful.</p>
+            <p>The value ad fetching provides to the customers for Conversio would be in the form of a daily notification that their competitors have  made new ads. A syncing task in the code runs every 24 hours so caching should at least be lower than this.</p>           
+          </>
+        }
+      />
+      <section className="content-2 align-items-center d-flex flex-column">
+        <WorkCard2 className="w-100 mb-5">
+          <h3>Saving fetched ads</h3>
+          <p>Saving the ads to the database is a simple mapping task. So it is pretty boring and no code example for you!</p>
+          <p>Fields are added or updated if they exist, and the many to many relational table is updated with the team that fetched the ads and therefore has access to them due to their API token.</p>
+          <p>All the data is just text and while it is small I made sure to tell the Senior Backend Developer that they should make a periodic task which checks the size of ad data so they don't run into problems down the road.</p>
+        </WorkCard2>
+      </section>
     </>
   )
 }
