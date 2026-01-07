@@ -244,7 +244,7 @@ function MetricsPreview2() {
           <div className="spinner-border spinner-border-sm me-3" role="status"></div>
           <div>
             <strong>Connection Lost:</strong> Attempting to reach the API... 
-            <small className="d-block">Oopsie! My backend server might be offline.</small>
+            <small className="d-block">WIP endpoints for the public website!</small>
           </div>
         </div>
       )}

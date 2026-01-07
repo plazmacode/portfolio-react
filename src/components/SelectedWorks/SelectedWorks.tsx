@@ -2,6 +2,7 @@ import "./SelectedWorks.css";
 import FloraHiveGameplay from "./FloraHiveGameplay.gif";
 import FloraHiveMetrics from "./FloraHiveMetrics.png";
 import GameBox from "./Gamebox.png";
+import Conversio from "./Conversio3.png";
 import { Link } from "react-router";
 
 interface SelectedWorksProps {
@@ -29,7 +30,15 @@ function SelectedWorks({ setTitle }: SelectedWorksProps) {
           <img src={FloraHiveMetrics} className="image-card" style={{ width: '320px' }} />
         </Link>
       </div>
-
+      <div 
+        className="position-relative d-inline-block"
+        onMouseEnter={() => setTitle({ top: "Conversio Hub", bottom: "Analysis Tools" })}
+        onMouseLeave={() => setTitle(defaultTitle)}
+      >
+        <Link to="/works#Conversio Hub">
+          <img src={Conversio} className="image-card" style={{ height: '320px' }} />
+        </Link>
+      </div>
       <div 
         className="position-relative d-inline-block"
         onMouseEnter={() => setTitle({ top: "Gamebox", bottom: "Festival" })}

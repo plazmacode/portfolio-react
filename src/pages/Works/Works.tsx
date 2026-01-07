@@ -46,7 +46,7 @@ function Works() {
         ),
         mainImage: ConversioHub,
         techStack: [Django, Python, Docker, PostgreSQL],
-        buttons: [{label: "Learn More"}]
+        buttons: [{label: "Learn More", link: "/works/Conversio"}]
       }
     ];
 

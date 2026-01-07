@@ -23,9 +23,18 @@ p {
   font-size: 24px
 }
 
-p, h1, h2, h3, h4 {
+h1, h2, h3, h4 {
   color: var(--main-text-color) !important;
   font-family: Inter, sans-serif;
+  font-weight: 150;
+}
+
+p {
+  color: var(--main-text-color) !important;
+  font-family: Inter, sans-serif;
+}
+
+p:not([class*="font-weight"]) {
   font-weight: 150;
 }
 

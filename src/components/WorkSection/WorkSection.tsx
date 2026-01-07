@@ -27,7 +27,7 @@ const WorkSection = ({ title, text, image, imageSide = "right", imgColSize = 6, 
   const textCol = (
     <div className={`col-md-${textColSize}`}>
       <WorkCard2>
-        {title && <h4>{title}</h4>}
+        {title && <h3>{title}</h3>}
         {text}
         {children}
       </WorkCard2>
