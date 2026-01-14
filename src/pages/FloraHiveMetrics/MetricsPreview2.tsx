@@ -283,7 +283,7 @@ export async function SimulateRun(settings: RunSimulationSettings, count: number
 
 export async function GetAllRuns(token: string, userRuns: boolean = true): Promise<Run[]> {
   let endpoint = `${import.meta.env.VITE_METRICS_BACKEND}/sim/run/`;
-  if (!userRuns) { endpoint += "/all"; }
+  if (!userRuns) { endpoint += "all"; }
 
   const getResponse = await fetch(endpoint, {
     method: "GET",
