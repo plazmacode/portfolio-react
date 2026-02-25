@@ -31,6 +31,7 @@ function About() {
             <div>
               <img src={Tobias} className="img-fluid rounded" style={{ width: '420px' }} alt="Tobias" />
               <p className="mt-3">tobiaskrogshede@gmail.com</p>
+              <a href="https://github.com/plazmacode">https://github.com/plazmacode</a>
             </div>
           </div>
         </div>
