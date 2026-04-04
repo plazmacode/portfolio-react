@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       { path: "works/conversio", element: <Conversio /> },
       { path: "works/florahive", element: <FloraHiveWorks /> },
       { path: "works/florahive-metrics", element: <MetricsWorks /> },
-      {path: "bugreport", element: <BugReport /> },
+      { path: "bugreport", element: <BugReport /> },
       { path: "interactive", element: <Interactive /> },
       { path: "*", element: <PageNotFound /> }
     ]
