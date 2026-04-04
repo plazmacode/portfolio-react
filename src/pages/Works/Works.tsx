@@ -30,7 +30,8 @@ function Works() {
         buttons: [
           {label: "Learn More", link: "/works/florahive"},
           {label: "Metrics Backend", link: "/works/florahive-metrics"},
-          {label: "Metrics Demo", link: "/interactive"}
+          {label: "Metrics Demo", link: "/interactive"},
+          {label: "Bug Report Site", link: "/bugreport"}
         ]
       },
       {

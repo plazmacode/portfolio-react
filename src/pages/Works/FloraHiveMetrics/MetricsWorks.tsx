@@ -27,6 +27,7 @@ function FloraHiveWorks() {
             <p>I did the primary work designing and implementing the system so that we can collect data from our users and visualize it. On top of that our metrics backend includes a simple frontend for visualization using graphs made with plotly</p>
             <br></br>
             <Link to="/interactive" className="work-button">Metrics Demo</Link>
+            <Link to="/bugreport" className="work-button">Bug Report Site</Link>
           </>
         }
       />
