@@ -17,7 +17,23 @@ import SystemReflection from "./SystemReflection.png";
 function FloraHiveWorks() {
   return (
     <>
-      <section className="header-spacing-2 content-2 align-items-center d-flex flex-column">
+    <section className="d-flex flex-column header-spacing-2 align-items-center w-100">
+      <h4 className="work-subtitle">FloraHive Steam Trailer</h4>
+      <h4>Or watch here on Steam:</h4>
+      <a href="https://store.steampowered.com/app/3413850/FloraHive/" target="_blank" rel="noopener noreferrer">
+        https://store.steampowered.com/app/3413850/FloraHive/
+      </a>
+      <iframe 
+        title="FloraHive Trailer" 
+        width="854" 
+        height="480"
+        src="https://drive.google.com/file/d/1BzuJmBesTvFg0DlQ5_nOoSzjcOsIOEY9/preview" 
+        allowFullScreen={true}
+        style={{ border: 'none' }}
+      ></iframe>
+    </section>
+
+      <section className="header-spacing content-2 align-items-center d-flex flex-column">
         <h1 className="work-title">The Complex Systems of FloraHive</h1>
       </section>
 
