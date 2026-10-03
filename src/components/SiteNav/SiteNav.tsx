@@ -37,7 +37,7 @@ const SiteNav: React.FC = () => {
         <Container fluid className="px-5">
           <div className="d-flex flex-column">
             <Navbar.Brand as={NavLink} to="/">[ Tobias Krogshede ]</Navbar.Brand>
-            <p className='navbar-brand-subtitle'>Software Developer</p>
+            <p className='navbar-brand-subtitle'>Software Engineer</p>
           </div>
   
           <Nav className="ms-auto">

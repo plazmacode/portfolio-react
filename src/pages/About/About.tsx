@@ -11,6 +11,7 @@ function About() {
         <div className="row">
           <div className="col-md-6">
             <p>I'm Tobias Krogshede a software developer interested in the technical aspects of designing and implementing systems.</p>
+            <p>I currently work at Antire as a Software Consultant.</p>
             <p>
               Performance optimization and good architecture are what I strive for, always researching and trying to get a deeper understanding of new technologies.
             </p>
