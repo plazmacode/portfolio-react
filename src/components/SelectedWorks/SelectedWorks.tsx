@@ -13,7 +13,7 @@ function SelectedWorks({ setTitle }: SelectedWorksProps) {
   const defaultTitle = { top: "Tobias", bottom: "Krogshede" };
 
   return (
-    <div className="d-flex flex-row" style={{ gap: '80px' }}>
+    <div className="d-flex flex-row flex-wrap" style={{ gap: '40px 80px' }}>
       <div 
         onMouseEnter={() => setTitle({ top: "FloraHive", bottom: "" })}
         onMouseLeave={() => setTitle(defaultTitle)}

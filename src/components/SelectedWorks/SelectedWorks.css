@@ -1,4 +1,6 @@
 .image-card {
+  max-width: 100%;
+  object-fit: contain;
   transition: all 0.2s ease-in-out;
   transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
   border-radius: 1.5rem;

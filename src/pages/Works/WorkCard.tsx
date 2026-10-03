@@ -17,7 +17,7 @@ function WorkCard({project}: WorkCardProps) {
             <div className="d-flex">
               <img src={project.mainImage} className="img-fluid work-image" alt={project.title} />
             </div>
-            <div className="d-flex justify-content-between px-5 mt-5">
+            <div className="d-flex justify-content-between px-5 mt-5 pb-3">
               {project.techStack.map((tech, index) => (
                 <img key={index} src={tech} className="img-fluid rounded" style={{height: '96px'}} alt="tech icon" />
               ))}

@@ -28,9 +28,9 @@ function About() {
             <source src={Gegenschein} type="audio/wav"/>
           </audio>
           </div>
-          <div className="col-md-6 d-flex justify-content-end align-items-start">
+          <div className="col-md-6 d-flex justify-content-md-end align-items-start mt-5 mt-md-0">
             <div>
-              <img src={Tobias} className="img-fluid rounded" style={{ width: '420px' }} alt="Tobias" />
+              <img src={Tobias} className="img-fluid rounded" style={{ width: '420px', maxWidth: '100%' }} alt="Tobias" />
               <p className="mt-3">tobiaskrogshede@gmail.com</p>
               <a href="https://github.com/plazmacode">https://github.com/plazmacode</a>
             </div>

@@ -12,7 +12,7 @@
 
 #root {
   background-color: var(--main-color);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 body {
@@ -75,4 +75,15 @@ li {
 .content-2 {
   width: 75%;
   margin: 0 auto;
+}
+
+@media (max-width: 767.98px) {
+  p {
+    font-size: 20px;
+  }
+
+  .content,
+  .content-2 {
+    width: 90%;
+  }
 }

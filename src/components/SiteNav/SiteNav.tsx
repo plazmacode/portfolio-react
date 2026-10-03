@@ -33,18 +33,23 @@ const SiteNav: React.FC = () => {
       <div className="nav-line nav-line-top"></div>
       <Navbar
       className={`${scrolled ? 'navbar-scrolled' : ''} ${isAltNav ? 'navbar-alt' : ''}`} 
-      expand="lg">
-        <Container fluid className="px-5">
+      expand="lg"
+      collapseOnSelect
+      data-bs-theme="dark">
+        <Container fluid className="px-3 px-md-5">
           <div className="d-flex flex-column">
             <Navbar.Brand as={NavLink} to="/">[ Tobias Krogshede ]</Navbar.Brand>
             <p className='navbar-brand-subtitle'>Software Engineer</p>
           </div>
-  
-          <Nav className="ms-auto">
-            <Nav.Link as={NavLink} to="/works">Works</Nav.Link>
-            <Nav.Link as={NavLink} to="/interactive">Interactive</Nav.Link>
-            <Nav.Link as={NavLink} to="/about">About</Nav.Link>
-          </Nav>
+
+          <Navbar.Toggle aria-controls="site-nav-links" />
+          <Navbar.Collapse id="site-nav-links">
+            <Nav className="ms-auto">
+              <Nav.Link as={NavLink} to="/works">Works</Nav.Link>
+              <Nav.Link as={NavLink} to="/interactive">Interactive</Nav.Link>
+              <Nav.Link as={NavLink} to="/about">About</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
       <div className="nav-line nav-line-bottom"></div>

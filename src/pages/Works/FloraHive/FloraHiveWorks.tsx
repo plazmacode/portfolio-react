@@ -19,18 +19,17 @@ function FloraHiveWorks() {
     <>
     <section className="d-flex flex-column header-spacing-2 align-items-center w-100">
       <h4 className="work-subtitle">FloraHive Steam Trailer</h4>
-      <h4>Or watch here on Steam:</h4>
-      <a href="https://store.steampowered.com/app/3413850/FloraHive/" target="_blank" rel="noopener noreferrer">
+      <h3>Or watch here on Steam:</h3>
+      <a href="https://store.steampowered.com/app/3413850/FloraHive/" target="_blank" rel="noopener noreferrer" className="text-break text-center px-3">
         https://store.steampowered.com/app/3413850/FloraHive/
       </a>
-      <iframe 
-        title="FloraHive Trailer" 
-        width="854" 
-        height="480"
-        src="https://drive.google.com/file/d/1BzuJmBesTvFg0DlQ5_nOoSzjcOsIOEY9/preview" 
-        allowFullScreen={true}
-        style={{ border: 'none' }}
-      ></iframe>
+      <div className="trailer-frame">
+        <iframe
+          title="FloraHive Trailer"
+          src="https://drive.google.com/file/d/1BzuJmBesTvFg0DlQ5_nOoSzjcOsIOEY9/preview"
+          allowFullScreen={true}
+        ></iframe>
+      </div>
     </section>
 
       <section className="header-spacing content-2 align-items-center d-flex flex-column">
